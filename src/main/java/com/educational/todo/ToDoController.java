@@ -2,10 +2,7 @@ package com.educational.todo;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("api/todo")
@@ -25,13 +22,40 @@ public class ToDoController {
         return new ResponseEntity<Integer>(myInteger, HttpStatus.OK);
     }
 
-    @RequestMapping(method = RequestMethod.POST, path = "/test3")
-    public ResponseEntity<Boolean> test3(@RequestBody String valid){
+    @RequestMapping(method = RequestMethod.POST, path = "/login")
+    public ResponseEntity<Boolean> login(@RequestBody LoginInfo loginInfo){
 
-        if(valid.length() < 1){
+        System.out.println("username: " + loginInfo.getUsername() );
+        System.out.println("password: " + loginInfo.getPassword());
+
+        if(loginInfo.getUsername().length() < 3){
             return new ResponseEntity<Boolean>(false, HttpStatus.BAD_REQUEST);
         }
+         return new ResponseEntity<Boolean>(true, HttpStatus.OK);
+    }
 
-        return new ResponseEntity<Boolean>(true, HttpStatus.OK);
+
+
+}
+
+class LoginInfo{
+
+    private String username;
+    private String password;
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }
