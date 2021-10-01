@@ -1,5 +1,7 @@
 package com.educational.todo;
 
+import com.educational.todo.repository.TaskRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -7,6 +9,9 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("api/todo")
 public class ToDoController {
+
+    @Autowired
+    private TaskRepository taskRepository;
 
     @RequestMapping(method = RequestMethod.GET, path = "/test")
     public ResponseEntity<String> test(){
